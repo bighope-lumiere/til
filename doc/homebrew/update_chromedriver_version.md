@@ -6,4 +6,4 @@
 
 シンプルに chromedriver のバージョンを上げれば解決。 `brew reinstall chromedriver` を実行。
 
-これは chrome を最新版にするなら定期的にやる必要がありそう
+これは chromeを最新版にするなら定期的にやる必要がありそう。
