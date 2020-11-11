@@ -1,4 +1,7 @@
-# GitHub CLI を導入してみる
+---
+title: GitHub CLI を導入してみる
+tags: github, cli, tools
+---
 
 [GitHub CLIで始める快適GitHub生活 - Qiita](https://qiita.com/ryo2132/items/2a29dd7b1627af064d7b) を読んで設定してみた。
 
