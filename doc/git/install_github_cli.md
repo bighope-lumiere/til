@@ -60,3 +60,5 @@ View this pull request on GitHub: https://github.com/bighope-lumiere/til/pull/1
 ## 感想
 
 これは便利。とくに til みたいな文章書いて push して pr つくって...みたいな一連の処理を完結させられるのは良い。
+
+alias として `gh prc = gh pr create -w` を登録しておいた。
