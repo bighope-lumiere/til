@@ -1,0 +1,55 @@
+---
+title: Scout Mixed-Initiative Exploration of Design Variations through High-Level Design Constraints
+tags: design, prototyping, user interfaces, program synthesis, constraint solving
+---
+
+[(PDF) Scout: Mixed-Initiative Exploration of Design Variations through High-Level Design Constraints](https://www.researchgate.net/publication/328323220_Scout_Mixed-Initiative_Exploration_of_Design_Variations_through_High-Level_Design_Constraints)
+
+## 概要
+
+これまでの制約ベースのレイアウトシステムは、低レベルの空間制約があり、それを満たすデザインを 1 つ作成するといった仕組みのものであった。Scout は高レベルの制約とデザインフィードバックとの相互作用を利用して、多様なデザインパターンを生成し、デザイナーがそれらを検討できるようになっている。
+なお、ここでの「高レベルの制約」とは、「Header は最も視覚的に目立つ要素でなければならない」といったものである。
+
+デザイナーは Scout に使用する UI 要素とそれらが満たすべき制約条件を constraint tree に入力する。すると Scout はそれらを満たすデザインパターンを複数個、自動生成してくれる。
+
+多様なデザインパターンを出すのはこれまでデザイナーの手作業で行われてきたため、網羅的でなく非効率な作業であることが多かったが、 Scout ではこれらの作業を機械的に行えるという点で意義がある。また、 8px grid などの数学的・機械的な制約を簡単で確実に保守できるというのもメリットとして考えられる。
+
+### Scout で指定できる制約の例
+
+- 要素のグルーピング（近接）
+- 近接グループにおいて順序が重要かどうかの指定
+- 最初 or 最後に現れるべき要素の指定
+- 繰り返し（a repeat group constraint）の指定（繰り返しパターンの中で一貫性を保つようにしてくれる）
+- 強調できる要素 or 要素グループの指定（Scout はサイズを大きくしたりデザインの中心に移動させることで強調する）
+
+### Scout でできるフィードバックの例
+
+- global (50px レイアウトグリッドを利用する)
+- relational (ロゴをヘッダーの上に配置する)
+- element (この要素をここに配置する)
+- arrangement specific (これらの要素のレイアウトを水平に保つ)
+
+## 実装
+
+- 制約は Z3 （おそらく [Z3Prover/z3: The Z3 Theorem Prover](https://github.com/Z3Prover/z3) ）を使用するデザイン合成エンジンにより、定式化された制約のセットに変換される
+- Scout は各要素の座標、高さ、幅のセットを出力として生成し、パターンとして描画している
+- Scout 内では基本的なデザイン制約（要素は重ならない、境界内にとどまる etc...）と高レベルの制約（強調、近接グループ化 etc...）を定式化している
+- いくつかのグラフィックデザインの原則を定式化し、デザインをランク付けするための評価関数 (cost function) でそれらを利用している
+
+## 今後の展望
+
+- 現状 Scout では要素の位置とサイズを変更して近接グループ化、強調、繰り返しグループを提供するレイアウトのバリエーションを探索できる
+- 将来的にはより多くのデザイン原則をソルバーに定式化し、より高度な評価関数を作成し、デザインの特性（font, color, etc...）をさらに変化させてバリエーションの幅を大きくする予定
+
+## 感想
+
+- Scout はかなり多くの Web デザイナーや UI デザイナーにインパクトを与える可能性を持った素晴らしいツールになりうると感じた。
+- 一方で、自分のリサーチの背景としてあった「engineering の良い点を輸入したい」的な気持ちは少しモヤモヤが大きくなった。
+- プログラムは永久に価値が保存されるものだと考えていたが、 Web 表現に流行り廃りがあるように、表現の価値を永久に保存できる形式ではないような気がしてきた。表現の価値を劣化しない形式で保存するにはどうすればよいのだろうか。。表現は表現する側だけで完結しないコミュニケーションである以上、その価値を保存することは難しそうだと感じている。
+
+- IMPREMENTATION を見る限り、リッチな Web の表現をたくさん生成できず、静的ページのレイアウトパターンをたくさん出すことに向いていることがわかった。
+- Web 表現はアニメーションや動画、インタラクションを活用したものや AR 技術の活用など日に日にリッチになってゆくため、自動生成可能な表現の幅を大きくすることでより良いものが作れそうだと思った。
+
+(補足: 2020 版のより詳しい論文があった [20201112_scout_2020.md](./20201112_scout_2020.md))
+
+- [Scout | The 31st Annual ACM Symposium on User Interface Software and Technology Adjunct Proceedings](https://dl.acm.org/doi/10.1145/3266037.3271626)
