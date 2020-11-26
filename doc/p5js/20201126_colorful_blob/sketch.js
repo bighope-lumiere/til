@@ -4,12 +4,16 @@ let N = 12;
 let noiseRange = 0.03;
 
 function setup() {
-  createCanvas(600, 600);
+  createCanvas(windowWidth, windowHeight);
   colorMode(HSB);
 }
 
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+
 function draw() {
-  background(24);
+  background(0);
   translate(width / 2, height / 2); // 座標系の原点を canvas 中心に設定
 
   let c = color(frameCount%360, 100, 100);
