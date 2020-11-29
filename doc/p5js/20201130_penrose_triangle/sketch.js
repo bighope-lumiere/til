@@ -16,15 +16,13 @@ function draw() {
   if (drawMode == 0) {
     colorMode(HSB);
     background(0);
-    stroke((3*frameCount)%360, 100, 100);
+    stroke(frameCount%360, 100, 100);
     drawShape();
     rotate(TWO_PI/3);
-    stroke((3*frameCount+120)%360, 100, 100);
     drawShape();
     rotate(TWO_PI/3);
-    stroke((3*frameCount+240)%360, 100, 100);
     drawShape();
-  } else if (drawMode == 1) {
+  } else {
     colorMode(RGB);
     background(255);
     stroke(0, 120);
